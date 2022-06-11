@@ -1,0 +1,18 @@
+@use "sass:meta";
+
+// Colors
+$primary: #000000;
+$light: #FFFFFF;
+$header-bg: #4E2870;
+$footer-bg: #333333;
+
+// Typography
+$font-family: 'Roboto Mono', monospace;
+
+.theme--default {
+    --primary: #{$primary};
+    --light: #{$light};
+    --header-bg: #{$header-bg};
+    --footer-bg: #{$footer-bg};
+    --font-family: #{meta.inspect($font-family)};
+}
