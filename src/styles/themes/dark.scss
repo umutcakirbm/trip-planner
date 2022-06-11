@@ -1,10 +1,10 @@
 // Colors
-$primary: #000000;
-$anti-primary: #FFFFFF;
-$header-bg: #4E2870;
-$footer-bg: #333333;
+$primary: #FFFFFF;
+$anti-primary: #000000;
+$header-bg: #DCCAEC;
+$footer-bg: #D6D6D6;
 
-.theme--default {
+.theme--dark {
     --primary: #{$primary};
     --anti-primary: #{$anti-primary};
     --header-bg: #{$header-bg};

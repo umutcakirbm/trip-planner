@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
+
+import { useThemeListener } from './services/theme/hooks';
 
 const App: React.FC = () => {
-  // TODO: Move this to redux state and add theme switch
-  const [theme] = useState('theme--default');
+  useThemeListener();
 
   return (
-    <main className={`theme ${theme}`}>
+    <main>
       <h1>Plan your trip!</h1>
     </main>
   );
