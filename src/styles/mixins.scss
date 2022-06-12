@@ -52,8 +52,7 @@
 
 @mixin map-variables($map) {
 
-    @each $name,
-    $value in $map {
+    @each $name, $value in $map {
         --#{$name}: #{$value};
     }
 }
@@ -73,4 +72,48 @@
 
     }
 
+}
+
+@mixin responsive-background($folder, $name, $extension) {
+    & {
+        background-image: url('#{$folder}/#{$name}-xs.#{$extension}');
+        background-position: center center;
+        background-size: cover;
+
+        @media (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi),
+        (min-width: 480px) {
+            & {
+                background-image: url('#{$folder}/#{$name}-sm.#{$extension}');
+            }
+        }
+
+        @media (min-width: 960px) {
+            & {
+                background-image: url('#{$folder}/#{$name}-md.#{$extension}');
+            }
+        }
+
+        @media (-webkit-min-device-pixel-ratio: 2) and (min-width: 960px),
+        (min-resolution: 192dpi) and (min-width: 960px) {
+            & {
+                background-image: url('#{$folder}/#{$name}-lg.#{$extension}');
+            }
+        }
+
+        @media (min-width: 1440px) {
+            & {
+                background-image: url('#{$folder}/#{$name}-lg.#{$extension}');
+            }
+        }
+
+        @media (-webkit-min-device-pixel-ratio: 2) and (min-width: 1440px),
+        (min-resolution: 192dpi) and (min-width: 1440px),
+        (min-width: 1920px) {
+            & {
+                background-image: url('#{$folder}/#{$name}-xl.#{$extension}');
+            }
+        }
+
+    }
 }
