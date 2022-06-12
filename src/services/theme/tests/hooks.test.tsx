@@ -9,9 +9,7 @@ import { useThemeListener } from '../hooks';
 
 describe('theme - hooks', () => {
   describe('useThemeListener', () => {
-    let container: HTMLElement | null = null;
     type EventListener = { name: string; fn: () => void };
-
     const listeners: EventListener[] = [];
     const watchMediaObj = {
       matches: false,
@@ -22,19 +20,19 @@ describe('theme - hooks', () => {
           1,
         ),
     } as unknown as MediaQueryList;
+    window.matchMedia = () => watchMediaObj;
+
     const changeMatches = function () {
       Object.assign(watchMediaObj, { matches: true });
       listeners.forEach(l => l.fn());
     };
-    window.matchMedia = function () {
-      return watchMediaObj;
-    };
-
-    function TestComponent() {
+    
+    const TestComponent: React.FC = () => {
       useThemeListener();
       return <></>;
     }
 
+    let container: HTMLElement | null = null;
     beforeAll(() => {
       container = document.createElement('div');
       document.body.appendChild(container);

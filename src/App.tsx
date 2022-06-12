@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Header from './components/header';
 import { useThemeListener } from './services/theme/hooks';
 
 const App: React.FC = () => {
@@ -7,7 +8,7 @@ const App: React.FC = () => {
 
   return (
     <main>
-      <h1>Plan your trip!</h1>
+      <Header />
     </main>
   );
 };
