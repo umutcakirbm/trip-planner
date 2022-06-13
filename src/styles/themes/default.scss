@@ -21,6 +21,8 @@ $gutters: (
 $variables: (
     text-primary: #000000,
     text-primary-inverted: #FFFFFF,
+    bg-primary: #FFFFFF,
+    bg-primary-inverted: #9B51E0,
     bg-header: #4E2870,
     bg-footer: #333333,
     fs-xl: 2rem,
@@ -29,6 +31,7 @@ $variables: (
     fs-sm: 0.75rem,
     fw-400: 400,
     fw-500: 500,
+    ls-primary: 0.05rem
 );
 
 @include theme-generator('default', $variables, $gutters);

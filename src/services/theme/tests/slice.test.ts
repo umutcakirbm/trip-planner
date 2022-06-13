@@ -21,7 +21,7 @@ describe('theme - slice', () => {
   describe('reducers - changeTheme', () => {
     const theme: Theme = 'dark';
 
-    it('changes theme to dark', async () => {
+    it('changes theme to dark', () => {
       store.dispatch(themeActions.changeTheme(theme));
       expect(store.getState()[themeSlice.name]?.theme).toBe(theme);
     });

@@ -68,6 +68,7 @@
             @include modifier-condition($name, $value, "bg", "background-color");
             @include modifier-condition($name, $value, "fs", "font-size");
             @include modifier-condition($name, $value, "fw", "font-weight");
+            @include modifier-condition($name, $value, "ls", "letter-spacing");
         }
 
     }
