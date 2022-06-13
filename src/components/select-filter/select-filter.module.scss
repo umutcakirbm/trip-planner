@@ -1,0 +1,33 @@
+.wrapper {
+    position: relative;
+    width: 100%;
+
+    &__label {
+        display: block;
+        text-transform: uppercase;
+        letter-spacing: 0.05rem;
+    }
+}
+
+.selectWrapper {
+    position: relative;
+    width: 100%;
+
+    &__select {
+        width: 100%;
+        border: 1px solid var(--text-primary);
+        border-radius: .5rem;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+
+        &::-ms-expand {
+            display: none;
+        }
+    }
+
+    &__icon {
+        position: absolute;
+        right: 0.75rem;
+        top: 1rem;
+    }
+}

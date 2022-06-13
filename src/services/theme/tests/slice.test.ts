@@ -15,7 +15,7 @@ describe('theme - slice', () => {
   let store = setupTestStore();
 
   beforeEach(() => {
-    store = setupTestStore(); // resets store state
+    store = setupTestStore();
   });
 
   describe('reducers - changeTheme', () => {

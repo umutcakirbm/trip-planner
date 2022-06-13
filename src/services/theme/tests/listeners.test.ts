@@ -1,6 +1,4 @@
 import { configureStore, createListenerMiddleware } from '@reduxjs/toolkit';
-import { waitFor } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
 
 import { setupThemeListeners } from '../listeners';
 import { themeActions, themeSlice, Theme } from '../slice';
@@ -26,9 +24,9 @@ describe('theme - listeners', () => {
   let store = setupTestStore();
 
   beforeEach(() => {
-    listenerMiddlewareInstance.clearListeners(); // Stops and cancels active listeners https://redux-toolkit.js.org/api/createListenerMiddleware#clearlisteners
-    onMiddlewareError.mockClear(); // https://jestjs.io/docs/mock-function-api#mockfnmockclear
-    store = setupTestStore(); // resets store state
+    listenerMiddlewareInstance.clearListeners();
+    onMiddlewareError.mockClear();
+    store = setupTestStore();
 
     setupThemeListeners(listenerMiddlewareInstance.startListening as AppStartListening);
   });
@@ -38,12 +36,7 @@ describe('theme - listeners', () => {
 
     it('changes theme and adds class name to <html> element', async () => {
       store.dispatch(themeActions.changeTheme(theme));
-
-      await act(() =>
-        waitFor(() => {
-          expect(document.documentElement.className).toBe(`theme theme--${theme}`);
-        }),
-      );
+      expect(document.documentElement.className).toBe(`theme theme--${theme}`);
     });
   });
 });

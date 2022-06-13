@@ -1,7 +1,6 @@
-import { render, waitFor } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import React from 'react';
 import { unmountComponentAtNode } from 'react-dom';
-import { act } from 'react-dom/test-utils';
 import { Provider } from 'react-redux';
 
 import { store } from '../../../redux/store';
@@ -45,25 +44,15 @@ describe('theme - hooks', () => {
     });
 
     it('useThemeListener hook runs correctly', async () => {
-      act(() => {
-        render(
-          <Provider store={store}>
-            <TestComponent />
-          </Provider>,
-          { container: container as HTMLElement },
-        );
-      });
-      await act(() =>
-        waitFor(() => {
-          expect(document.documentElement.className).toBe('theme theme--default');
-        }),
+      render(
+        <Provider store={store}>
+          <TestComponent />
+        </Provider>,
+        { container: container as HTMLElement },
       );
+      expect(document.documentElement.className).toBe('theme theme--default');
       changeMatches();
-      await act(() =>
-        waitFor(() => {
-          expect(document.documentElement.className).toBe('theme theme--dark');
-        }),
-      );
+      expect(document.documentElement.className).toBe('theme theme--dark');
     });
   });
 });
