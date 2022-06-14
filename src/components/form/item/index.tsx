@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import styles from './item.module.scss';
+import styles from './styles.module.scss';
 
 export type FormItemProps = { id: string; label: string; children: ReactElement };
 

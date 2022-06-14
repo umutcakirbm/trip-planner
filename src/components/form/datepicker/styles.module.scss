@@ -20,15 +20,15 @@
         gap: var(--gap);
         min-width: 0;
         min-height: 0;
-        width: calc((100% / var(--xs-button-count) * var(--lg-button-count)) + var(--gap));
+        width: calc((100% / var(--xs-button-count) * var(--lg-button-count)));
         height: var(--pickerHeight);
 
         @media (min-width: $breakpoints-xs) {
-            width: calc((100% / var(--sm-button-count) * var(--lg-button-count)) + var(--gap));
+            width: calc((100% / var(--sm-button-count) * var(--lg-button-count)));
         }
 
         @media (min-width: $breakpoints-sm) {
-            width: calc((100% / var(--md-button-count) * var(--lg-button-count)) + var(--gap));
+            width: calc((100% / var(--md-button-count) * var(--lg-button-count)));
         }
 
         @media (min-width: $breakpoints-md) {
@@ -52,6 +52,7 @@
 
     &_lastDay {
         margin-right: .25rem;
+        width: calc(100% - .25rem - 1px);
     }
 
     &__button {

@@ -5,6 +5,7 @@
 html {
   font-family: 'Roboto Mono', monospace;
   font-size: .75rem;
+  color: var(--text-primary);
 
   @media (min-width: 375px) and (min-height: 768px) {
     font-size: 1rem;
@@ -25,4 +26,9 @@ body {
 
 main {
   height: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: currentColor;
 }

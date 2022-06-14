@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import FormItem from '../Item';
 
 import DatepickerButton, { DatepickerButtonProps } from './DatepickerButton';
-import styles from './datepicker.module.scss';
+import styles from './styles.module.scss';
 import { getDateRangeArray } from './utils';
 
 export type DatepickerProps = {

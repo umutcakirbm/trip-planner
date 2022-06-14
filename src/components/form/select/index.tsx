@@ -3,7 +3,7 @@ import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { ReactComponent as ArrowDownIcon } from '../../../images/icons/arrow-down.svg';
 import FormItem from '../Item';
 
-import styles from './select.module.scss';
+import styles from './styles.module.scss';
 
 export type FormSelectProps = {
   id: string;

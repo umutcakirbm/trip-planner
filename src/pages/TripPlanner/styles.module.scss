@@ -4,7 +4,7 @@
 .plannerWrapper {
     display: grid;
     grid-template-rows: repeat(3, max-content) 1fr;
-    grid-template-columns: 1fr repeat(1, minmax(0, #{$container-size})) 1fr;
+    grid-template-columns: 1fr minmax(0, #{$container-size}) 1fr;
     gap: 1rem;
     height: 100%;
 
@@ -17,7 +17,7 @@
     @media(min-width: $breakpoints-md) {
         & {
             grid-template-rows: repeat(2, max-content) 1fr;
-            grid-template-columns: 1fr repeat(2, minmax(0, #{math.div($container-size, 2)})) 1fr;
+            grid-template-columns: 1fr repeat(2, minmax(0, calc(#{math.div($container-size, 2)} - .5rem))) 1fr;
         }
 
         &__filterCountry {
@@ -34,19 +34,37 @@
     }
 }
 
-
 .products {
     border-top: 1px solid var(--bg-border);
     display: grid;
     height: 100%;
     width: 100%;
     grid-template-columns: 1fr repeat(1, minmax(0, #{$container-size})) 1fr;
-    grid-column: 1/5;
+    grid-column: 1/4;
+    gap: 1rem;
+
+    @media(min-width: $breakpoints-md) {
+        grid-column: 1/5;
+    }
 
     &__alert {
         grid-column: 2;
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    &__items {
+        display: grid;
+        grid-column: 2;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        height: max-content;
+    }
+
+    @media(min-width: $breakpoints-md) {
+        &__items {
+            grid-template-columns: 1fr 1fr;
+        }
     }
 }

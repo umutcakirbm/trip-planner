@@ -18,9 +18,13 @@ $gutters: (
     64: 4rem
 );
 
+$text-primary-rgb: 255, 255, 255;
 $variables: (
     text-primary: #FFFFFF,
+    text-primary-rgb: #{$text-primary-rgb},
     text-primary-inverted: #000000,
+    text-secondary: #555555,
+    text-success: #BB0000,
     bg-primary: #000000,
     bg-primary-inverted: #9B51E0,
     bg-header: #DCCAEC,

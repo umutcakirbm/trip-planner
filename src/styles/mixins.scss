@@ -12,39 +12,50 @@
 
 @mixin gutter-modifiers($gutters) {
 
-    @each $key, $value in $gutters {
+    @each $key,
+    $value in $gutters {
         .mt-#{$key} {
             margin-top: #{$value};
         }
+
         .mb-#{$key} {
             margin-bottom: #{$value};
         }
+
         .my-#{$key} {
             margin-top: #{$value};
             margin-bottom: #{$value};
         }
+
         .ml-#{$key} {
             margin-left: #{$value};
         }
+
         .mr-#{$key} {
             margin-right: #{$value};
         }
+
         .pt-#{$key} {
             padding-top: #{$value};
         }
+
         .pb-#{$key} {
             padding-bottom: #{$value};
         }
+
         .py-#{$key} {
             padding-top: #{$value};
             padding-bottom: #{$value};
         }
+
         .pl-#{$key} {
             padding-left: #{$value};
         }
+
         .pr-#{$key} {
             padding-right: #{$value};
         }
+
         .px-#{$key} {
             padding-left: #{$value};
             padding-right: #{$value};
@@ -54,7 +65,8 @@
 
 @mixin map-variables($map) {
 
-    @each $name, $value in $map {
+    @each $name,
+    $value in $map {
         --#{$name}: #{$value};
     }
 }
@@ -65,7 +77,8 @@
         @include map-variables($variables);
         @include gutter-modifiers($gutters);
 
-        @each $name, $value in $variables {
+        @each $name,
+        $value in $variables {
             @include modifier-condition($name, $value, "text", "color");
             @include modifier-condition($name, $value, "bg", "background-color");
             @include modifier-condition($name, $value, "fs", "font-size");
@@ -118,5 +131,16 @@
             }
         }
 
+    }
+}
+
+@mixin line-clamp($line) {
+    & {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        line-clamp: $line;
+        -webkit-line-clamp: $line;
+        -webkit-box-orient: vertical;
     }
 }

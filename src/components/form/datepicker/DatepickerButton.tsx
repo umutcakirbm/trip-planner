@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Days, DaysLabelMapping } from '../../../enums/days';
 
-import styles from './datepicker.module.scss';
+import styles from './styles.module.scss';
 
 export type DatepickerButtonProps = {
   originalISOString: string;
