@@ -1,14 +1,17 @@
+@import '../../../styles/common';
+
 .wrapper {
     --xs-button-count: 4;
     --sm-button-count: 5;
     --md-button-count: 6;
     --lg-button-count: 7;
     --gap: .25rem;
+    --pickerHeight: 72px;
 
     width: 100%;
     overflow-y: scroll;
 
-    @media (min-width: 1200px) {
+    @media (min-width: $breakpoints-xl) {
         overflow: hidden;
     }
 
@@ -18,21 +21,17 @@
         min-width: 0;
         min-height: 0;
         width: calc((100% / var(--xs-button-count) * var(--lg-button-count)) + var(--gap));
-        height: 72px;
+        height: var(--pickerHeight);
 
-        @media (min-width: 375px) {
+        @media (min-width: $breakpoints-xs) {
             width: calc((100% / var(--sm-button-count) * var(--lg-button-count)) + var(--gap));
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: $breakpoints-sm) {
             width: calc((100% / var(--md-button-count) * var(--lg-button-count)) + var(--gap));
         }
 
-        @media (min-width: 992px) {
-            width: calc((100% / var(--md-button-count) * var(--lg-button-count)) + var(--gap));
-        }
-
-        @media (min-width: 1024px) {
+        @media (min-width: $breakpoints-md) {
             width: 100%;
         }
     }
@@ -40,6 +39,8 @@
 }
 
 .buttonWrapper {
+    --daySeparatorHeight: 40px;
+
     display: inline-flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -60,8 +61,8 @@
         border: 1px solid var(--text-primary);
         border-radius: .5rem;
         cursor: pointer;
-        
-        @media (min-width: 1200px) {
+
+        @media (min-width: $breakpoints-xl) {
             transition: color .5s ease-out;
         }
 
@@ -79,7 +80,7 @@
 
     &__lastDayBorder {
         width: 1px;
-        height: 40px;
+        height: var(--daySeparatorHeight);
         background-color: var(--text-primary);
 
         &_disabled {

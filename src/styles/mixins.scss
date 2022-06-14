@@ -1,3 +1,5 @@
+@import './common';
+
 @mixin modifier-condition($name, $value, $key, $attribute) {
     @if str-index($name, $key) {
         .#{$key} {
@@ -82,35 +84,35 @@
         background-size: cover;
 
         @media (-webkit-min-device-pixel-ratio: 2),
-        (min-resolution: 192dpi),
-        (min-width: 480px) {
+        (min-resolution: $retinaDpi),
+        (min-width: $breakpoints-sm) {
             & {
                 background-image: url('#{$folder}/#{$name}-sm.#{$extension}');
             }
         }
 
-        @media (min-width: 960px) {
+        @media (min-width: $breakpoints-lg) {
             & {
                 background-image: url('#{$folder}/#{$name}-md.#{$extension}');
             }
         }
 
-        @media (-webkit-min-device-pixel-ratio: 2) and (min-width: 960px),
-        (min-resolution: 192dpi) and (min-width: 960px) {
+        @media (-webkit-min-device-pixel-ratio: 2) and (min-width: $breakpoints-lg),
+        (min-resolution: $retinaDpi) and (min-width: $breakpoints-lg) {
             & {
                 background-image: url('#{$folder}/#{$name}-lg.#{$extension}');
             }
         }
 
-        @media (min-width: 1440px) {
+        @media (min-width: $breakpoints-xl) {
             & {
                 background-image: url('#{$folder}/#{$name}-lg.#{$extension}');
             }
         }
 
-        @media (-webkit-min-device-pixel-ratio: 2) and (min-width: 1440px),
-        (min-resolution: 192dpi) and (min-width: 1440px),
-        (min-width: 1920px) {
+        @media (-webkit-min-device-pixel-ratio: 2) and (min-width: $breakpoints-xl),
+        (min-resolution: $retinaDpi) and (min-width: $breakpoints-xl),
+        (min-width: $breakpoints-xxl) {
             & {
                 background-image: url('#{$folder}/#{$name}-xl.#{$extension}');
             }

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import FormItem from '../item';
+import FormItem from '../Item';
 
-import DatepickerButton, { DatepickerButtonProps } from './datepicker-button';
+import DatepickerButton, { DatepickerButtonProps } from './DatepickerButton';
 import styles from './datepicker.module.scss';
 import { getDateRangeArray } from './utils';
 

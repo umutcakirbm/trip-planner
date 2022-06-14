@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 
 import { DaysLabelMapping } from '../../../../enums/days';
-import DatepickerButton, { DatepickerButtonProps } from '../datepicker-button';
+import DatepickerButton, { DatepickerButtonProps } from '../DatepickerButton';
 
 describe('components - datepickerButton', () => {
   let selectedDate: string;

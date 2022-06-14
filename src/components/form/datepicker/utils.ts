@@ -1,4 +1,4 @@
-import { DatepickerButtonProps } from './datepicker-button';
+import { DatepickerButtonProps } from './DatepickerButton';
 
 export const getDateRangeArray = (
   from: string,
