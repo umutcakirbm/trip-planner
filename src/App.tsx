@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import Footer from './components/footer';
 import Datepicker from './components/form/datepicker';
 import FormSelect from './components/form/select';
 import Header from './components/header';
@@ -29,6 +30,7 @@ const App: React.FC = () => {
         selectedDate={date}
         onSelect={setDate}
       />
+      <Footer />
     </main>
   );
 };
