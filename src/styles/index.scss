@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap');
 @import '~normalize.css/normalize';
 @import './themes';
+@import './common';
 
 html {
   font-family: 'Roboto Mono', monospace;
   font-size: .75rem;
   color: var(--text-primary);
 
-  @media (min-width: 375px) and (min-height: 768px) {
+  @media (min-width: $breakpoints-xs) and (min-height: $breakpoints-md) {
     font-size: 1rem;
   }
 }
@@ -15,6 +16,7 @@ html {
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--text-primary-inverted);
 }
 
 #root {

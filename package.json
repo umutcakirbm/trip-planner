@@ -2,7 +2,7 @@
   "name": "assignment-solution",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://umutcakirbm.github.io",
+  "homepage": "https://umutcakirbm.github.io/tiqets-fe-assignment",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.2",
     "@testing-library/jest-dom": "5.14.1",

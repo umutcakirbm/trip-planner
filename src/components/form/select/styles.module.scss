@@ -16,6 +16,8 @@
         width: 100%;
         border: 1px solid var(--text-primary);
         border-radius: .5rem;
+        background-color: var(--text-primary-inverted);
+        color: var(--text-primary);
         -webkit-appearance: none;
         -moz-appearance: none;
 
@@ -28,11 +30,13 @@
         position: absolute;
         right: 0.75rem;
         top: 1rem;
+        height: 1.5rem;
     }
 
     &__spinner {
         position: absolute;
         right: 1rem;
         top: 1rem;
+        height: .25rem;
     }
 }

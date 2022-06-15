@@ -61,6 +61,7 @@
         height: 100%;
         border: 1px solid var(--text-primary);
         border-radius: .5rem;
+        color: var(--text-primary);
         cursor: pointer;
 
         @media (min-width: $breakpoints-xl) {
