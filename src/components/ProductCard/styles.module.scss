@@ -17,7 +17,7 @@
 
         @media (min-width: $breakpoints-md) {
             grid-template-columns: auto;
-            grid-template-rows: 3fr max-content;
+            grid-template-rows: 3fr .7fr .5fr;
             margin-right: 0 !important;
         }
     }

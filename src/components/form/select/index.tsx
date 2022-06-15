@@ -1,17 +1,20 @@
-import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import React, { ChangeEvent, useCallback, useMemo } from 'react';
 
 import { ReactComponent as ArrowDownIcon } from '../../../images/icons/arrow-down.svg';
 import FormItem from '../Item';
 
 import styles from './styles.module.scss';
 
+export type OptionsObject = { label: string; value: string | number };
+export type OptionsObjectArray = Array<OptionsObject>;
+export type OptionsStringArray = Array<string>;
 export type FormSelectProps = {
   id: string;
   label: string;
   placeholder: string;
-  value?: string;
-  options: Array<{ label: string; value: string }>;
-  onChange?: (value: string) => void;
+  value?: string | number;
+  options: OptionsObjectArray | OptionsStringArray;
+  onChange?: (value: string | number) => void;
 };
 
 const FormSelect: React.FC<FormSelectProps> = ({
@@ -22,19 +25,41 @@ const FormSelect: React.FC<FormSelectProps> = ({
   options = [],
   onChange = () => null,
 }: FormSelectProps) => {
-  const handleChange = useCallback((event: ChangeEvent<HTMLSelectElement>) => {
-    onChange(event.target?.value);
-  }, []);
-
-  const [localValue, setLocalValue] = useState(value);
-
-  useEffect(() => {
-    if (options?.find((option) => option.value === value)) {
-      setLocalValue(value);
-    } else {
-      setLocalValue('');
+  const {
+    localOptions,
+    valueType,
+  }: {
+    localOptions: OptionsObjectArray;
+    valueType: string;
+  } = useMemo(() => {
+    let opts: OptionsObjectArray = [];
+    let vType = 'string';
+    if (options?.length) {
+      if ((options[0] as OptionsObject).label) {
+        opts = options as OptionsObjectArray;
+        vType = typeof opts[0].value;
+      } else {
+        opts = (options as OptionsStringArray).map((opt) => ({ label: opt, value: opt }));
+      }
     }
-  }, [value, options]);
+    return { localOptions: opts, valueType: vType };
+  }, [options]);
+
+  const handleChange = useCallback((event: ChangeEvent<HTMLSelectElement>) => {
+    let val: string | number = event.target?.value;
+    if (valueType === 'number') {
+      val = parseInt(val as string, 10);
+    }
+    onChange(val);
+  }, [valueType]);
+
+  const localValue = useMemo(() => {
+    let val = '';
+    if (localOptions?.find((option) => option.value === value)) {
+      val = value?.toString();
+    }
+    return val;
+  }, [value, localOptions]);
 
   return (
     <div className={styles.wrapper}>
@@ -50,7 +75,7 @@ const FormSelect: React.FC<FormSelectProps> = ({
             <option value='' disabled>
               {placeholder}
             </option>
-            {options.map((opt) => (
+            {localOptions.map((opt) => (
               <option key={opt.value} value={opt.value}>
                 {opt.label}
               </option>

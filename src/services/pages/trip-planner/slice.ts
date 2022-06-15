@@ -5,10 +5,10 @@ import { Slices } from '../../../enums/slices';
 import { RootState } from '../../../redux/store';
 
 export interface Filters {
-  country: string | null;
-  cityId: number | null;
-  date: string | null;
-  cityList: Array<[number, string]>;
+  country?: string;
+  cityId?: number;
+  date?: string;
+  cityList: Array<{label: string, value: number}>;
 }
 
 export interface TripPlannerState {
@@ -20,9 +20,6 @@ export const tripPlannerSlice = createSlice({
   name: Slices.PAGE_TRIP_PLANNER,
   initialState: {
     filters: {
-      country: null,
-      cityId: null,
-      date: null,
       cityList: [],
     },
     productList: [],
@@ -37,7 +34,7 @@ export const tripPlannerSlice = createSlice({
     changeDate(state, action: PayloadAction<string>) {
       state.filters.date = action.payload;
     },
-    setCityList(state, action: PayloadAction<Array<[number, string]>>) {
+    setCityList(state, action: PayloadAction<Array<{label: string, value: number}>>) {
       state.filters.cityList = action.payload;
     },
     setProductList(state, action: PayloadAction<Array<ProductCardProps>>) {

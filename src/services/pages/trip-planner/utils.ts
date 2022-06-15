@@ -21,3 +21,9 @@ export const transformSearchProductsResponse = (
     }) || []
   );
 };
+
+export const transformCityListResponse = (
+  cityListResponse: Array<[number, string]>,
+): Array<{ label: string; value: number }> => {
+  return cityListResponse.map((cityItem) => ({ value: cityItem[0], label: cityItem[1] }));
+};

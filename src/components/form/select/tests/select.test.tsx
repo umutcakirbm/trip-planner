@@ -60,8 +60,13 @@ describe('components - formSelect', () => {
     expect(screen.getByRole('combobox')).toHaveValue('1');
   });
 
-  it('options should be set', () => {
+  it('options should be set as Object Array', () => {
     setup();
+    expect(screen.getAllByRole('option')).toHaveLength(params.options.length + 1);
+  });
+
+  it('options should be set as String Array', () => {
+    setup({...params, options: ['Test', 'Test2']});
     expect(screen.getAllByRole('option')).toHaveLength(params.options.length + 1);
   });
 });

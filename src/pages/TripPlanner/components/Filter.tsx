@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Datepicker from '../../../components/Form/Datepicker';
 import FormSelect from '../../../components/Form/Select';
+import { SetFilters } from '../../../services/pages/trip-planner/hooks';
+import { Filters } from '../../../services/pages/trip-planner/slice';
 import styles from '../styles.module.scss';
 
-const Filter: React.FC = () => {
-  const [value, setValue] = useState('');
-  const [date, setDate] = useState('2021-07-31');
+export type FilterProps = {
+  filters: Filters & {
+    countryList: string[];
+    availableDates: string[];
+  };
+  setFilters: (filter: SetFilters, value: string | number) => void;
+};
+
+const Filter: React.FC<FilterProps> = ({ filters, setFilters }: FilterProps) => {
   return (
     <>
       <div className={styles.plannerWrapper__filterCountry}>
@@ -14,9 +22,9 @@ const Filter: React.FC = () => {
           id='country-filter'
           label='Country'
           placeholder='Choose the country'
-          value={value}
-          options={[{ label: 'test', value: '1' }]}
-          onChange={setValue}
+          value={filters.country}
+          options={filters.countryList}
+          onChange={(value) => setFilters('Country', value)}
         />
       </div>
       <div className={styles.plannerWrapper__filterCity}>
@@ -24,18 +32,18 @@ const Filter: React.FC = () => {
           id='city-filter'
           label='City'
           placeholder='Choose the city'
-          value={value}
-          options={[{ label: 'test', value: '1' }]}
-          onChange={setValue}
+          value={filters.cityId}
+          options={filters.cityList}
+          onChange={(value) => setFilters('City', value)}
         />
       </div>
       <div className={styles.plannerWrapper__filterDate}>
         <Datepicker
           id='datepicker'
           label='Date'
-          availableDates={['2021-07-30', '2021-07-31']}
-          selectedDate={date}
-          onSelect={setDate}
+          availableDates={filters.availableDates}
+          selectedDate={filters.date}
+          onSelect={(value) => setFilters('Date', value)}
         />
       </div>
     </>

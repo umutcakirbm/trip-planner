@@ -15,8 +15,8 @@ import { transformSearchProductsResponse } from './utils';
 
 export type SetFilters = 'Country' | 'City' | 'Date';
 export type TripPlannerActionKey = keyof typeof tripPlannerActions;
-export type TripPlannerAction = (payload: string | number | null) => {
-  payload: string | number | null;
+export type TripPlannerAction = (payload: string | number) => {
+  payload: string | number;
   type: string;
 };
 export type TripPlannerHook = [
@@ -24,8 +24,8 @@ export type TripPlannerHook = [
     countryList: Array<string>;
     availableDates: AvailableDatesResponse;
   },
-  setFilters: (filter: SetFilters, value: string | number | null) => void,
-  products: Array<ProductCardProps>
+  setFilters: (filter: SetFilters, value: string | number) => void,
+  products: Array<ProductCardProps>,
 ];
 
 export function useTripPlannerState(): TripPlannerHook {
@@ -41,7 +41,7 @@ export function useTripPlannerState(): TripPlannerHook {
   }, [locationsQuery, availableDatesQuery, filters]);
 
   const setFilters = useCallback(
-    (filter: SetFilters, value: string | number | null) => {
+    (filter: SetFilters, value: string | number) => {
       dispatch(
         (tripPlannerActions[`change${filter}` as TripPlannerActionKey] as TripPlannerAction)(value),
       );
@@ -49,10 +49,13 @@ export function useTripPlannerState(): TripPlannerHook {
     [dispatch],
   );
 
-  const searchProductsQuery = useSearchProductsQuery({
-    cityId: filters.cityId as number,
-    date: filters.date as string,
-  });
+  const searchProductsQuery = useSearchProductsQuery(
+    {
+      cityId: filters.cityId as number,
+      date: filters.date as string,
+    },
+    { skip: !filters.cityId || !filters.date },
+  );
 
   const productList: Array<ProductCardProps> = useMemo(
     () => transformSearchProductsResponse(searchProductsQuery.data),
