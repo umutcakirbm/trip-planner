@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { Slices } from '../../enums/slices';
+
 export type Theme = 'default' | 'dark';
 
 export interface ThemeState {
@@ -7,7 +9,7 @@ export interface ThemeState {
 }
 
 export const themeSlice = createSlice({
-  name: 'theme',
+  name: Slices.THEME,
   initialState: {
     theme: 'default',
   } as ThemeState,
