@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useCallback, useMemo } from 'react';
 
 import { ReactComponent as ArrowDownIcon } from '../../../images/icons/arrow-down.svg';
+import Spinner from '../../Spinner';
 import FormItem from '../Item';
 
 import styles from './styles.module.scss';
@@ -14,6 +15,7 @@ export type FormSelectProps = {
   placeholder: string;
   value?: string | number;
   options: OptionsObjectArray | OptionsStringArray;
+  isPending: boolean;
   onChange?: (value: string | number) => void;
 };
 
@@ -23,6 +25,7 @@ const FormSelect: React.FC<FormSelectProps> = ({
   placeholder = '',
   value = '',
   options = [],
+  isPending = true,
   onChange = () => null,
 }: FormSelectProps) => {
   const {
@@ -45,13 +48,16 @@ const FormSelect: React.FC<FormSelectProps> = ({
     return { localOptions: opts, valueType: vType };
   }, [options]);
 
-  const handleChange = useCallback((event: ChangeEvent<HTMLSelectElement>) => {
-    let val: string | number = event.target?.value;
-    if (valueType === 'number') {
-      val = parseInt(val as string, 10);
-    }
-    onChange(val);
-  }, [valueType]);
+  const handleChange = useCallback(
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      let val: string | number = event.target?.value;
+      if (valueType === 'number') {
+        val = parseInt(val as string, 10);
+      }
+      onChange(val);
+    },
+    [valueType],
+  );
 
   const localValue = useMemo(() => {
     let val = '';
@@ -81,7 +87,11 @@ const FormSelect: React.FC<FormSelectProps> = ({
               </option>
             ))}
           </select>
-          <ArrowDownIcon className={styles.selectWrapper__icon} />
+          {isPending ? (
+            <Spinner className={styles.selectWrapper__spinner} />
+          ) : (
+            <ArrowDownIcon className={styles.selectWrapper__icon} />
+          )}
         </div>
       </FormItem>
     </div>

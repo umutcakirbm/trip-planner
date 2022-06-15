@@ -9,8 +9,9 @@ import { AvailableDatesResponse } from '../../apis/date/types';
 import { useGetLocationsQuery } from '../../apis/location/api';
 import { useSearchProductsQuery } from '../../apis/product/api';
 
+import { ProductListState, ProductListStateMapping } from './enums';
 import { setupTripPlannerListeners } from './listeners';
-import { Filters, tripPlannerActions, tripPlannerSelectors } from './slice';
+import { Filters, FiltersDisability, tripPlannerActions, tripPlannerSelectors } from './slice';
 import { transformSearchProductsResponse } from './utils';
 
 export type SetFilters = 'Country' | 'City' | 'Date';
@@ -19,6 +20,7 @@ export type TripPlannerAction = (payload: string | number) => {
   payload: string | number;
   type: string;
 };
+export type QueryFetchState = { locations: boolean; products: boolean };
 export type TripPlannerHook = [
   filters: Filters & {
     countryList: Array<string>;
@@ -26,6 +28,9 @@ export type TripPlannerHook = [
   },
   setFilters: (filter: SetFilters, value: string | number) => void,
   products: Array<ProductCardProps>,
+  productListState: string,
+  isDisabled: FiltersDisability,
+  isPending: QueryFetchState,
 ];
 
 export function useTripPlannerState(): TripPlannerHook {
@@ -33,6 +38,8 @@ export function useTripPlannerState(): TripPlannerHook {
   const locationsQuery = useGetLocationsQuery();
   const availableDatesQuery = useGetAvailableDatesQuery();
   const filters = useAppSelector(tripPlannerSelectors.selectFilters);
+  const productList = useAppSelector(tripPlannerSelectors.selectProductList);
+  const isDisabled = useAppSelector(tripPlannerSelectors.selectIsDisabled);
 
   const combinedFilters = useMemo(() => {
     const countryList = Object.keys(locationsQuery.data || {});
@@ -57,9 +64,23 @@ export function useTripPlannerState(): TripPlannerHook {
     { skip: !filters.cityId || !filters.date },
   );
 
-  const productList: Array<ProductCardProps> = useMemo(
-    () => transformSearchProductsResponse(searchProductsQuery.data),
-    [searchProductsQuery],
+  const productListState: string = useMemo(() => {
+    let state = ProductListState.WAITING_FOR_COUNTRY;
+    if (filters.date && !searchProductsQuery.data?.length && !searchProductsQuery.isFetching) {
+      state = ProductListState.NOT_FOUND;
+    } else if (filters.date) {
+      state = ProductListState.READY;
+    } else if (filters.cityId) {
+      state = ProductListState.WAITING_FOR_DATE;
+    } else if (filters.country) {
+      state = ProductListState.WAITING_FOR_CITY;
+    }
+    return ProductListStateMapping[state];
+  }, [searchProductsQuery, filters]);
+
+  const isPending: QueryFetchState = useMemo(
+    () => ({ locations: locationsQuery.isFetching, products: searchProductsQuery.isFetching }),
+    [locationsQuery, searchProductsQuery],
   );
 
   useEffect(() => {
@@ -69,5 +90,14 @@ export function useTripPlannerState(): TripPlannerHook {
     };
   }, []);
 
-  return [combinedFilters, setFilters, productList];
+  useEffect(() => {
+    if (searchProductsQuery.isSuccess) {
+      const transformedProductList = transformSearchProductsResponse(
+        searchProductsQuery.data || [],
+      );
+      dispatch(tripPlannerActions.setProductList(transformedProductList));
+    }
+  }, [searchProductsQuery]);
+
+  return [combinedFilters, setFilters, productList, productListState, isDisabled, isPending];
 }

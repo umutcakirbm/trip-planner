@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
+
+import { useIntersection } from '../../hooks/useIntersection';
 
 import styles from './styles.module.scss';
 
 export type ProductCardProps = {
+  id: number;
   image: string;
   link: string;
   title: string;
@@ -19,18 +22,26 @@ const ProductCard: React.FC<ProductCardProps> = ({
   price,
   discountPrice,
 }: ProductCardProps) => {
+  const [isCardInView, setIsCardInView] = useState(false);
+  const imgRef = useRef<HTMLPictureElement>(null);
+
+  useIntersection(imgRef, () => {
+    setIsCardInView(true);
+  });
+
   return (
     <article className={styles.productCard}>
       <div className={`${styles.productCard__card} mr-12`}>
-        <div className={styles.productCard__imageWrapper}>
-          <img
-            alt={title}
-            loading='lazy'
-            className={styles.productCard__image}
-            src={image}
-            srcSet={`${image}&dpr=2 2x`}
-          />
-        </div>
+        <picture className={styles.productCard__imageWrapper} ref={imgRef}>
+          {isCardInView && (
+            <img
+              alt={title}
+              className={styles.productCard__image}
+              src={image}
+              srcSet={`${image} 2x`}
+            />
+          )}
+        </picture>
         <h3 className={`${styles.productCard__title} fs-md fw-500 mb-0 mt-12`}>
           <a className={styles.productCard__link} href={link} target='_blank' rel='noreferrer'>
             {title}

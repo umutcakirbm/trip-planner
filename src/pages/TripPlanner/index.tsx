@@ -7,12 +7,18 @@ import ProductList from './components/ProductList';
 import styles from './styles.module.scss';
 
 const TripPlannerPage: React.FC = () => {
-  const [filters, setFilters, productList] = useTripPlannerState();
+  const [filters, setFilters, productList, productListState, isDisabled, isPending] =
+    useTripPlannerState();
 
   return (
     <section className={styles.plannerWrapper}>
-      <Filter filters={filters} setFilters={setFilters} />
-      <ProductList products={productList} />
+      <Filter
+        filters={filters}
+        setFilters={setFilters}
+        isDisabled={isDisabled}
+        isPending={isPending.locations}
+      />
+      <ProductList products={productList} alert={productListState} isPending={isPending.products} />
     </section>
   );
 };

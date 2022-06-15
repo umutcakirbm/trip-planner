@@ -9,6 +9,7 @@ export const transformSearchProductsResponse = (
     searchProductsResponse?.map((product) => {
       const priceStr = transformNumberToCurrency(product.price);
       return {
+        id: product.id,
         image: product.image,
         link: product.productUrl,
         title: product.title,

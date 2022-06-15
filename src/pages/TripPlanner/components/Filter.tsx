@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import Datepicker from '../../../components/Form/Datepicker';
 import FormSelect from '../../../components/Form/Select';
+import { useAffix } from '../../../hooks/useAffix';
 import { SetFilters } from '../../../services/pages/trip-planner/hooks';
-import { Filters } from '../../../services/pages/trip-planner/slice';
+import { Filters, FiltersDisability } from '../../../services/pages/trip-planner/slice';
 import styles from '../styles.module.scss';
 
 export type FilterProps = {
@@ -12,11 +13,16 @@ export type FilterProps = {
     availableDates: string[];
   };
   setFilters: (filter: SetFilters, value: string | number) => void;
+  isDisabled: FiltersDisability;
+  isPending: boolean;
 };
 
-const Filter: React.FC<FilterProps> = ({ filters, setFilters }: FilterProps) => {
+const Filter: React.FC<FilterProps> = ({ filters, setFilters, isDisabled, isPending }: FilterProps) => {
+  const filterRef = useRef<HTMLDivElement>(null);
+  useAffix(filterRef, styles.plannerWrapper_affix);
+
   return (
-    <>
+    <div ref={filterRef} className={styles.plannerWrapper__filter}>
       <div className={styles.plannerWrapper__filterCountry}>
         <FormSelect
           id='country-filter'
@@ -25,9 +31,14 @@ const Filter: React.FC<FilterProps> = ({ filters, setFilters }: FilterProps) => 
           value={filters.country}
           options={filters.countryList}
           onChange={(value) => setFilters('Country', value)}
+          isPending={isPending}
         />
       </div>
-      <div className={styles.plannerWrapper__filterCity}>
+      <div
+        className={`${styles.plannerWrapper__filterCity} ${
+          isDisabled.city && styles.plannerWrapper_disabled
+        }`}
+      >
         <FormSelect
           id='city-filter'
           label='City'
@@ -35,9 +46,14 @@ const Filter: React.FC<FilterProps> = ({ filters, setFilters }: FilterProps) => 
           value={filters.cityId}
           options={filters.cityList}
           onChange={(value) => setFilters('City', value)}
+          isPending={isPending}
         />
       </div>
-      <div className={styles.plannerWrapper__filterDate}>
+      <div
+        className={`${styles.plannerWrapper__filterDate} ${
+          isDisabled.date && styles.plannerWrapper_disabled
+        }`}
+      >
         <Datepicker
           id='datepicker'
           label='Date'
@@ -46,7 +62,7 @@ const Filter: React.FC<FilterProps> = ({ filters, setFilters }: FilterProps) => 
           onSelect={(value) => setFilters('Date', value)}
         />
       </div>
-    </>
+    </div>
   );
 };
 
