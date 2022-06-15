@@ -2,6 +2,7 @@
   "name": "assignment-solution",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://umutcakirbm.github.io",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.2",
     "@testing-library/jest-dom": "5.14.1",
@@ -25,6 +26,7 @@
   "scripts": {
     "start": "concurrently \"react-scripts start\" \"json-server db/db.json --middlewares db/middleware.js --port 3001\"",
     "build": "react-scripts build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
@@ -52,6 +54,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "7.24.0",
     "eslint-plugin-react-hooks": "^4.5.0",
+    "gh-pages": "^4.0.0",
     "prettier": "^2.6.2"
   }
 }
