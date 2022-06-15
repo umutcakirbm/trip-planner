@@ -3,6 +3,7 @@ import { configureStore, createListenerMiddleware, TypedStartListening } from '@
 import { datesApi } from '../services/apis/date/api';
 import { locationApi } from '../services/apis/location/api';
 import { productApi } from '../services/apis/product/api';
+import { tripPlannerSlice } from '../services/pages/trip-planner/slice';
 import { themeSlice } from '../services/theme/slice';
 
 const listenerMiddlewareInstance = createListenerMiddleware({
@@ -13,6 +14,7 @@ const listenerMiddlewareInstance = createListenerMiddleware({
 export const store = configureStore({
   reducer: {
     [themeSlice.name]: themeSlice.reducer,
+    [tripPlannerSlice.name]: tripPlannerSlice.reducer,
     [locationApi.reducerPath]: locationApi.reducer,
     [datesApi.reducerPath]: datesApi.reducer,
     [productApi.reducerPath]: productApi.reducer,
