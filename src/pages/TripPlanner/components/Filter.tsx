@@ -27,11 +27,11 @@ const Filter: React.FC<FilterProps> = ({
   isLocationsError,
   isDatesError,
 }: FilterProps) => {
-  const filterRef = useRef<HTMLDivElement>(null);
+  const filterRef = useRef<HTMLFormElement>(null);
   useAffix(filterRef, styles.plannerWrapper_affix);
 
   return (
-    <div ref={filterRef} className={styles.plannerWrapper__filter}>
+    <form ref={filterRef} className={styles.plannerWrapper__filter}>
       <div
         className={`${styles.plannerWrapper__filterCountry} ${
           isPending && styles.plannerWrapper_disabled
@@ -79,7 +79,7 @@ const Filter: React.FC<FilterProps> = ({
           isError={isDatesError}
         />
       </div>
-    </div>
+    </form>
   );
 };
 
