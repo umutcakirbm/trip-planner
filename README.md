@@ -30,6 +30,11 @@ In this project, React Hooks, RTK Queries and Redux Toolkit work together. Compo
 
 ## How to Run & Build
 
+**Used Versions**
+
+- NodeJS Version: `v16.15.1`
+- npm Version: `8.11.0`
+
 This command directly creates a build distribution: `npm install && npm run build`
 
 ## Other things that can be added / developed
