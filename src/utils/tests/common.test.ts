@@ -19,14 +19,16 @@ describe('utils - common', () => {
 
   describe('transformResponseToCamelCase', () => {
     it('transforms object response to camelcase object response', () => {
-      const camelcase = transformResponseToCamelCase({ 'underscore_string': 'test' });
+      const underscoreKey = 'underscore_string';
+      const camelcase = transformResponseToCamelCase({ [underscoreKey]: 'test' });
       expect(camelcase).toHaveProperty('underscoreString');
     });
   });
 
   describe('transformResponseListToCamelCase', () => {
     it('transforms object list response to camelcase object list response', () => {
-      const camelcase = transformResponseListToCamelCase([{ 'underscore_string': 'test' }]);
+      const underscoreKey = 'underscore_string';
+      const camelcase = transformResponseListToCamelCase([{ [underscoreKey]: 'test' }]);
       expect(camelcase).toHaveLength(1);
       expect(camelcase[0]).toHaveProperty('underscoreString');
     });
