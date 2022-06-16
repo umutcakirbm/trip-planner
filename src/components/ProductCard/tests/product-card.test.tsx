@@ -5,6 +5,7 @@ import ProductCard, { ProductCardProps } from '..';
 
 describe('components - productCard', () => {
   const params: ProductCardProps = {
+    id: 1,
     image: 'test-image.jpg',
     link: '/test.html',
     title: 'Test Title',
@@ -13,14 +14,26 @@ describe('components - productCard', () => {
   };
 
   const setup = (props: ProductCardProps = params) => {
+    const observe = jest.fn();
+    const unobserve = jest.fn();
+    window.IntersectionObserver = jest.fn(() => ({
+      observe,
+      unobserve,
+    })) as unknown as {
+      new (
+        callback: IntersectionObserverCallback,
+        options?: IntersectionObserverInit | undefined,
+      ): IntersectionObserver;
+      prototype: IntersectionObserver;
+    };
     const component = (_props = props) => <ProductCard {..._props} />;
     const utils = render(component());
     return { rerender: (_props: ProductCardProps) => utils.rerender(component(_props)) };
   };
 
-  it('image should be set', () => {
+  it('image should not be set because of lazy loading', () => {
     setup();
-    expect(screen.getByAltText(params.title)).toBeInTheDocument();
+    expect(screen.queryByAltText(params.title)).not.toBeInTheDocument();
   });
 
   it('link and title should be set', () => {
@@ -46,7 +59,7 @@ describe('components - productCard', () => {
   });
 
   it('discount price should be set if exist', () => {
-    setup({...params, discountPrice: '€15.00'});
+    setup({ ...params, discountPrice: '€15.00' });
     expect(screen.getByText(params.price)).toHaveClass('productCard__price_discounted');
     const discountEl = screen.getByText(params.price).querySelector('span');
     expect(discountEl).toBeInTheDocument();
