@@ -15,15 +15,28 @@ export type FilterProps = {
   setFilters: (filter: SetFilters, value: string | number) => void;
   isDisabled: FiltersDisability;
   isPending: boolean;
+  isLocationsError: boolean;
+  isDatesError: boolean;
 };
 
-const Filter: React.FC<FilterProps> = ({ filters, setFilters, isDisabled, isPending }: FilterProps) => {
+const Filter: React.FC<FilterProps> = ({
+  filters,
+  setFilters,
+  isDisabled,
+  isPending,
+  isLocationsError,
+  isDatesError,
+}: FilterProps) => {
   const filterRef = useRef<HTMLDivElement>(null);
   useAffix(filterRef, styles.plannerWrapper_affix);
 
   return (
     <div ref={filterRef} className={styles.plannerWrapper__filter}>
-      <div className={styles.plannerWrapper__filterCountry}>
+      <div
+        className={`${styles.plannerWrapper__filterCountry} ${
+          isPending && styles.plannerWrapper_disabled
+        }`}
+      >
         <FormSelect
           id='country-filter'
           label='Country'
@@ -32,11 +45,12 @@ const Filter: React.FC<FilterProps> = ({ filters, setFilters, isDisabled, isPend
           options={filters.countryList}
           onChange={(value) => setFilters('Country', value)}
           isPending={isPending}
+          isError={isLocationsError}
         />
       </div>
       <div
         className={`${styles.plannerWrapper__filterCity} ${
-          isDisabled.city && styles.plannerWrapper_disabled
+          (isDisabled.city || isPending) && styles.plannerWrapper_disabled
         }`}
       >
         <FormSelect
@@ -47,6 +61,7 @@ const Filter: React.FC<FilterProps> = ({ filters, setFilters, isDisabled, isPend
           options={filters.cityList}
           onChange={(value) => setFilters('City', value)}
           isPending={isPending}
+          isError={isLocationsError}
         />
       </div>
       <div
@@ -60,6 +75,8 @@ const Filter: React.FC<FilterProps> = ({ filters, setFilters, isDisabled, isPend
           availableDates={filters.availableDates}
           selectedDate={filters.date}
           onSelect={(value) => setFilters('Date', value)}
+          isDisabled={isDisabled.date}
+          isError={isDatesError}
         />
       </div>
     </div>

@@ -1,9 +1,9 @@
 import { DatepickerButtonProps } from './DatepickerButton';
 
 export const getDateRangeArray = (
-  from: string,
+  from: string = new Date().toISOString(),
   dayCount: number,
-  availableDates: string[],
+  availableDates: string[] = [],
   selectedDate?: string,
 ): Array<DatepickerButtonProps> => {
   const currentDate = new Date(from);

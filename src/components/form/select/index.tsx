@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useCallback, useMemo } from 'react';
 
+import { ErrorsMapping } from '../../../enums/errors';
 import { ReactComponent as ArrowDownIcon } from '../../../images/icons/arrow-down.svg';
 import Spinner from '../../Spinner';
 import FormItem from '../Item';
@@ -15,7 +16,8 @@ export type FormSelectProps = {
   placeholder: string;
   value?: string | number;
   options: OptionsObjectArray | OptionsStringArray;
-  isPending: boolean;
+  isPending?: boolean;
+  isError?: boolean;
   onChange?: (value: string | number) => void;
 };
 
@@ -26,6 +28,7 @@ const FormSelect: React.FC<FormSelectProps> = ({
   value = '',
   options = [],
   isPending = true,
+  isError = false,
   onChange = () => null,
 }: FormSelectProps) => {
   const {
@@ -93,6 +96,7 @@ const FormSelect: React.FC<FormSelectProps> = ({
             <ArrowDownIcon className={styles.selectWrapper__icon} />
           )}
         </div>
+        <>{isError && <span className='fs-xs'>{ErrorsMapping.FETCH_ERROR}</span>}</>
       </FormItem>
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import { ErrorsMapping } from '../../../enums/errors';
 import FormItem from '../Item';
 
 import DatepickerButton, { DatepickerButtonProps } from './DatepickerButton';
@@ -11,6 +12,8 @@ export type DatepickerProps = {
   label: string;
   availableDates: Array<string>;
   selectedDate?: string;
+  isDisabled?: boolean;
+  isError?: boolean;
   onSelect?: (isoString: string) => void;
 };
 
@@ -19,15 +22,15 @@ const Datepicker: React.FC<DatepickerProps> = ({
   label = '',
   availableDates = [],
   selectedDate,
+  isDisabled = false,
+  isError = false,
   onSelect = () => null,
 }: DatepickerProps) => {
   const [dateRange, setDateRange] = useState([] as DatepickerButtonProps[]);
 
   useEffect(() => {
-    if (availableDates?.length) {
-      const range = getDateRangeArray(availableDates[0], 7, availableDates, selectedDate);
-      setDateRange(range);
-    }
+    const range = getDateRangeArray(availableDates?.[0], 7, availableDates, selectedDate);
+    setDateRange(range);
   }, [availableDates, selectedDate]);
 
   return (
@@ -39,10 +42,12 @@ const Datepicker: React.FC<DatepickerProps> = ({
               key={`${date.date}${date.day}`}
               {...date}
               onSelect={onSelect}
+              disabled={!isDisabled ? date.disabled : false}
             />
           ))}
         </div>
       </div>
+      <>{isError && <span className='fs-sm'>{ErrorsMapping.FETCH_ERROR}</span>}</>
     </FormItem>
   );
 };

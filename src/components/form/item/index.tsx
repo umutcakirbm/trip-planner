@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 
 import styles from './styles.module.scss';
 
-export type FormItemProps = { id: string; label: string; children: ReactElement };
+export type FormItemProps = { id: string; label: string; children: ReactElement | ReactElement[] };
 
 const FormItem: React.FC<FormItemProps> = ({ id = '', label = '', children }: FormItemProps) => {
   return (
