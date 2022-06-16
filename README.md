@@ -26,7 +26,7 @@ In this project, React Hooks, RTK Queries and Redux Toolkit work together. Compo
 - **styles:** `Sass supported style files like mixins, common variables are placed in this folder`
 - **utils:** `Common util functions are placed in this folder`
 
-![Project Structure](https://drive.google.com/uc?export=view&id=13VEMCJab3npyCe2slnzNYGBCkCZJEWjy)
+![Project Structure](structure.png)
 
 ## How to Run & Build
 
