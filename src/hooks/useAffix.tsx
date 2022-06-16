@@ -7,14 +7,14 @@ export const useAffix = (elem: RefObject<HTMLElement>, affixClassName: string): 
     const position = target.offsetHeight;
     const listener = () => {
       const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      const totalHeight = document.documentElement.clientHeight || document.body.clientHeight;
-      if (scrollTop >= position && totalHeight > scrollTop + target.clientHeight) {
-        if (!target.classList.contains(affixClassName)) {
-          target.classList.add(affixClassName);
-          parentEl.style.paddingTop = `${target.clientHeight}px`;
-          parentEl.style.height = 'auto';
-        }
-      } else if (target.classList.contains(affixClassName)) {
+      if (
+        scrollTop >= position + target.clientHeight &&
+        !target.classList.contains(affixClassName)
+      ) {
+        target.classList.add(affixClassName);
+        parentEl.style.paddingTop = `${target.clientHeight}px`;
+        parentEl.style.height = 'auto';
+      } else if (scrollTop <= position - 32 && target.classList.contains(affixClassName)) {
         target.classList.remove(affixClassName);
         parentEl.style.paddingTop = '';
         parentEl.style.height = '';
