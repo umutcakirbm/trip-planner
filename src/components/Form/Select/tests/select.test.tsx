@@ -66,7 +66,7 @@ describe('components - formSelect', () => {
   });
 
   it('options should be set as String Array', () => {
-    setup({...params, options: ['Test', 'Test2']});
+    setup({ ...params, options: ['Test', 'Test2'] });
     expect(screen.getAllByRole('option')).toHaveLength(params.options.length + 1);
   });
 });

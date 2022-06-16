@@ -20,11 +20,7 @@ const TripPlannerPage: React.FC = () => {
         isLocationsError={isError.locations}
         isDatesError={isError.dates}
       />
-      <ProductList
-        products={productList}
-        alert={productListState}
-        isPending={isPending.products}
-      />
+      <ProductList products={productList} alert={productListState} isPending={isPending.products} />
     </section>
   );
 };

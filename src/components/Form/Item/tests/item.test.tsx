@@ -4,16 +4,15 @@ import React from 'react';
 import FormItem, { FormItemProps } from '..';
 
 describe('components - formItem', () => {
-
   const params: FormItemProps = {
     id: 'country-filter',
     label: 'Country',
-    children: (<div>childTest</div>),
+    children: <div>childTest</div>,
   };
 
   const setup = (props: FormItemProps = params) => {
     render(<FormItem {...props} />);
-  }
+  };
 
   it('label should be set', () => {
     setup();

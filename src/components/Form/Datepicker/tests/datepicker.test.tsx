@@ -18,7 +18,7 @@ describe('components - datepicker', () => {
   const setup = (props: DatepickerProps = params) => {
     const component = (_props = props) => <Datepicker {..._props} />;
     const utils = render(component());
-    return { rerender: (_props: DatepickerProps) => utils.rerender(component(_props)) }
+    return { rerender: (_props: DatepickerProps) => utils.rerender(component(_props)) };
   };
 
   it('label should be set', () => {

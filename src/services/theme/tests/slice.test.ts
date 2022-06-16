@@ -3,7 +3,6 @@ import { configureStore } from '@reduxjs/toolkit';
 import { themeActions, themeSlice, Theme } from '../slice';
 
 describe('theme - slice', () => {
-
   function setupTestStore() {
     return configureStore({
       reducer: {

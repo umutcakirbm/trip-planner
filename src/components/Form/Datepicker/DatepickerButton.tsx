@@ -24,7 +24,9 @@ const DatepickerButton: React.FC<DatepickerButtonProps> = ({
   onSelect = () => null,
 }: DatepickerButtonProps) => {
   return (
-    <div className={`${styles.buttonWrapper} ${isLastDayOfTheMonth && styles.buttonWrapper_lastDay}`}>
+    <div
+      className={`${styles.buttonWrapper} ${isLastDayOfTheMonth && styles.buttonWrapper_lastDay}`}
+    >
       <button
         className={`${styles.buttonWrapper__button} ${
           selected && styles.buttonWrapper__button_selected
@@ -36,7 +38,8 @@ const DatepickerButton: React.FC<DatepickerButtonProps> = ({
         <div className='fs-lg fw-500'>{date}</div>
       </button>
       {isLastDayOfTheMonth && (
-        <div role="separator"
+        <div
+          role='separator'
           className={`${styles.buttonWrapper__lastDayBorder} ${
             disabled && styles.buttonWrapper__lastDayBorder_disabled
           } ml-4`}

@@ -1,5 +1,5 @@
 export enum Apis {
-    LOCATION = 'locationApi',
-    DATE = 'dateApi',
-    PRODUCT = 'productApi',
+  LOCATION = 'locationApi',
+  DATE = 'dateApi',
+  PRODUCT = 'productApi',
 }
