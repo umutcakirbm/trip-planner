@@ -1,4 +1,4 @@
-# Tiqets Frontend Assignment
+# Trip Planner
 
 This project includes trip planner React application. 
 
